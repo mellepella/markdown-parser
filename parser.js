@@ -2,6 +2,7 @@ class Parser {
   static write() {
     document.getElementById("output").innerHTML = this.parse();
   }
+  
   static parse(sentInContent) {
     const content = sentInContent || document.getElementById("input").value;
 

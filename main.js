@@ -1,8 +1,6 @@
-const commandNames = {
+const dictionary = {
   "#": (content) => {
-    return Parser.header(content);
+    return Parser.header(content)
   },
-  write: (content) => {
-    document.body.innerHTML = content;
-  },
+  "**": ["<strong>", "</strong>", 0]
 };

@@ -1,13 +1,28 @@
 class Parser {
   static parse(content) {
     const firstChar = content.charAt(0);
+    let rowContent = content;
 
-    if (commandNames[firstChar]) {
-      console.log(`${commandNames[firstChar]}, ${content}`);
-      return commandNames[firstChar](content);
-    } else {
-      return `<p>${content}</p>`;
+    if (dictionary[firstChar]) {
+      rowContent = dictionary[firstChar](content);
     }
+    for (const letter of rowContent) {
+      const letters = letter + letter;
+      
+      if(dictionary.hasOwnProperty(letters)) {
+        const timesDiscovered = dictionary[letters][2];
+        dictionary[letters][2] += 1;
+
+        if(timesDiscovered % 2 === 0) {
+          rowContent = rowContent.replace(letters, dictionary[letters][0]);
+        } else {
+          rowContent = rowContent.replace(letters, dictionary[letters][1]);
+        }
+      }
+    }
+      console.log(rowContent);
+
+      return `<p>${rowContent}</p>`;
   }
 
   static header(content) {

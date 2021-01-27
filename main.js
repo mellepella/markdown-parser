@@ -2,5 +2,9 @@ const dictionary = {
   "#": (content) => {
     return Parser.header(content)
   },
-  "**": ["<strong>", "</strong>", 0]
+  "**": {
+    "begin": "<strong>",
+    "end": "</strong>",
+    "timesDiscovered": 0,
+  }
 };

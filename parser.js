@@ -10,18 +10,20 @@ class Parser {
       const letters = letter + letter;
       
       if(dictionary.hasOwnProperty(letters)) {
-        const timesDiscovered = dictionary[letters][2];
-        dictionary[letters][2] += 1;
+        const timesDiscovered = dictionary[letters].timesDiscovered;
+        dictionary[letters].timesDiscovered += 1;
 
-        if(timesDiscovered % 2 === 0) {
-          rowContent = rowContent.replace(letters, dictionary[letters][0]);
+        if(isEven(timesDiscovered)) {
+          rowContent = rowContent.replace(letters, dictionary[letters].begin);
         } else {
-          rowContent = rowContent.replace(letters, dictionary[letters][1]);
+          rowContent = rowContent.replace(letters, dictionary[letters].end);
         }
       }
     }
-      console.log(rowContent);
 
+    for (const word in dictionary) {
+      dictionary[word].timesDiscovered = 0;
+    }
       return `<p>${rowContent}</p>`;
   }
 

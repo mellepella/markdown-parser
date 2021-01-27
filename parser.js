@@ -1,6 +1,10 @@
 class Parser {
-  static parse(content) {
-    
+  static write() {
+    document.getElementById("output").innerHTML = this.parse();
+  }
+  static parse(sentInContent) {
+    const content = sentInContent || document.getElementById("input").value;
+
     //Check for # (header)
     const firstChar = content.charAt(0);
     let rowContent = content;
@@ -29,7 +33,7 @@ class Parser {
       return `<p>${rowContent}</p>`;
   }
 
-  static header(content) {
+  static createHeader(content) {
     let contentExcludedHashtag = content.split("");
     contentExcludedHashtag = contentExcludedHashtag.slice(
       1,

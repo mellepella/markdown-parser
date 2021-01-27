@@ -1,6 +1,6 @@
 const dictionary = {
   "#": (content) => {
-    return Parser.header(content)
+    return Parser.createHeader(content)
   },
   "**": {
     "begin": "<strong>",

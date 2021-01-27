@@ -1,18 +1,19 @@
 class Parser {
   static parse(content) {
+    
+    //Check for # (header)
     const firstChar = content.charAt(0);
     let rowContent = content;
-
     if (dictionary[firstChar]) {
       rowContent = dictionary[firstChar](content);
     }
+
+    //Check for other symbols and replace with tags
     for (const letter of rowContent) {
       const letters = letter + letter;
-      
       if(dictionary.hasOwnProperty(letters)) {
         const timesDiscovered = dictionary[letters].timesDiscovered;
         dictionary[letters].timesDiscovered += 1;
-
         if(isEven(timesDiscovered)) {
           rowContent = rowContent.replace(letters, dictionary[letters].begin);
         } else {
@@ -21,6 +22,7 @@ class Parser {
       }
     }
 
+    //Change timesDiscovered to 0 on all props in dictionary
     for (const word in dictionary) {
       dictionary[word].timesDiscovered = 0;
     }

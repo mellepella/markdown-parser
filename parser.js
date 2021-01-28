@@ -2,27 +2,37 @@ class Parser {
   static write() {
     document.getElementById("output").innerHTML = this.parse();
   }
+
+  static replace(letter, content) {
+    let rowContent = content;
+    if(dictionary.hasOwnProperty(letter)) {
+      const timesDiscovered = dictionary[letter].timesDiscovered;
+      if(isEven(timesDiscovered)) {
+        rowContent = rowContent.replace(letter, dictionary[letter].begin);
+      } 
+      else if(!isEven(timesDiscovered)) {
+        rowContent = rowContent.replace(letter, dictionary[letter].end);
+      }
+    }
+    return rowContent;
+  }
   
   static parse(sentInContent) {
     const content = sentInContent || document.getElementById("input").value;
-
+    
     //Check for # (header)
     const firstChar = content.charAt(0);
     let rowContent = content;
-    if (dictionary[firstChar]) {
-      rowContent = dictionary[firstChar](content);
+    if (rowDictionary[firstChar]) {
+      rowContent = rowDictionary[firstChar](content);
     }
-
-    //Check for other symbols and replace with tags
-    for (const letter of rowContent) {
-      const letters = letter + letter;
-      if(dictionary.hasOwnProperty(letters)) {
-        const timesDiscovered = dictionary[letters].timesDiscovered;
-        dictionary[letters].timesDiscovered += 1;
-        if(isEven(timesDiscovered)) {
-          rowContent = rowContent.replace(letters, dictionary[letters].begin);
-        } else {
-          rowContent = rowContent.replace(letters, dictionary[letters].end);
+    
+    for (const prop in dictionary) {
+      console.log("Prop:" + prop);
+      if(rowContent.includes(prop)) {
+        while(rowContent !== this.replace(prop, rowContent)) {
+          rowContent = this.replace(prop, rowContent);
+          dictionary[prop].timesDiscovered += 1;
         }
       }
     }

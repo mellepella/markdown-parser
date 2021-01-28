@@ -1,3 +1,7 @@
+window.onload = () => {
+  Parser.write();
+}
+
 class Parser {
   static parse(sentInContent) {
     const content = sentInContent || document.getElementById("input").value;

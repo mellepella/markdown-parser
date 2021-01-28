@@ -1,10 +1,16 @@
 class Parser {
   static parse(sentInContent) {
     const content = sentInContent || document.getElementById("input").value;
-    const firstChar = content.charAt(0);
+    let headerValue = 1;
+    let charIndex = 0;
+    const firstChar = content.charAt(charIndex);
     let rowContent = content;
     if (rowDictionary[firstChar]) {
-      rowContent = rowDictionary[firstChar](content);
+      while(content.charAt(charIndex) === content.charAt(charIndex + 1)) {
+        charIndex += 1;
+        headerValue += 1;
+      }
+      rowContent = rowDictionary[firstChar](content, headerValue);
     }
     for (const prop in dictionary) {
       if(rowContent.includes(prop)) {
@@ -34,14 +40,15 @@ class Parser {
     return rowContent;
   }
 
-  static createHeader(content) {
+  static createHeader(content, headerValue) {
+    
     let contentExcludedHashtag = content.split("");
     contentExcludedHashtag = contentExcludedHashtag.slice(
-      1,
+      headerValue,
       contentExcludedHashtag.length
     );
     contentExcludedHashtag = contentExcludedHashtag.join("");
-    return `<h1>${contentExcludedHashtag}</h1>`;
+    return `<h${headerValue}>${contentExcludedHashtag}</h${headerValue}>`;
   }
 
   static write() {

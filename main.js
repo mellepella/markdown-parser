@@ -12,7 +12,7 @@ const dictionary = {
 };
 
 const rowDictionary = {
-  "#": (content) => {
-    return Parser.createHeader(content)
+  "#": (content, headerValue) => {
+    return Parser.createHeader(content, headerValue)
   },
 }

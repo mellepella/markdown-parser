@@ -4,7 +4,17 @@ const dictionary = {
     "end": "</strong>",
     "timesDiscovered": 0,
   },
+  "__": {
+    "begin": "<strong>",
+    "end": "</strong>",
+    "timesDiscovered": 0,
+  },
   "*": {
+    "begin": "<i>",
+    "end": "</i>",
+    "timesDiscovered": 0,
+  },
+  "_": {
     "begin": "<i>",
     "end": "</i>",
     "timesDiscovered": 0,
